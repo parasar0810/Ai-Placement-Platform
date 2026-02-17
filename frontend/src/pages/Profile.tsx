@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { User, Mail, Award, BookOpen, GraduationCap, Github, Linkedin, Save } from 'lucide-react';
+import { Mail, Award, BookOpen, GraduationCap, Github, Linkedin, Save } from 'lucide-react';
 
 interface UserProfile {
     id: string;
