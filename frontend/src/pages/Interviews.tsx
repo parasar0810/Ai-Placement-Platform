@@ -30,7 +30,7 @@ const Interviews = () => {
     const fetchCompanies = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:8080/api/v1/companies', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/companies`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCompanies(res.data);
@@ -51,7 +51,7 @@ const Interviews = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:8080/api/v1/companies/${company.id}/questions`, {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/companies/${company.id}/questions`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setQuestions(res.data);

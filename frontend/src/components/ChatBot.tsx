@@ -47,7 +47,7 @@ const ChatBot = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:8080/api/v1/ai/chat', 
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/ai/chat`,
                 { message: userMsg.text },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -93,11 +93,10 @@ const ChatBot = () => {
                     <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
                         {messages.map((msg) => (
                             <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                                    msg.sender === 'user' 
-                                        ? 'bg-indigo-600 text-white rounded-br-none' 
+                                <div className={`max-w-[80%] p-3 rounded-lg text-sm ${msg.sender === 'user'
+                                        ? 'bg-indigo-600 text-white rounded-br-none'
                                         : 'bg-white border text-gray-800 rounded-bl-none shadow-sm'
-                                }`}>
+                                    }`}>
                                     {msg.text}
                                 </div>
                             </div>
@@ -124,7 +123,7 @@ const ChatBot = () => {
                                 className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
                                 disabled={loading}
                             />
-                            <button 
+                            <button
                                 onClick={handleSend}
                                 disabled={loading || !inputText.trim()}
                                 className="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 disabled:bg-gray-300 transition"
@@ -138,7 +137,7 @@ const ChatBot = () => {
 
             {/* Float Button */}
             {!isOpen && (
-                <button 
+                <button
                     onClick={() => setIsOpen(true)}
                     className="bg-indigo-600 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 transition-transform transform hover:scale-105 flex items-center gap-2"
                 >

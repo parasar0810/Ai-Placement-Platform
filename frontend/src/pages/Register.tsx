@@ -84,7 +84,7 @@ const Register = () => {
                         <GoogleLogin
                             onSuccess={async (credentialResponse) => {
                                 try {
-                                    const res = await axios.post('http://localhost:8080/api/v1/auth/google', {
+                                    const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/auth/google`, {
                                         idToken: credentialResponse.credential
                                     });
                                     localStorage.setItem('token', res.data.token);

@@ -34,8 +34,8 @@ const DsaTracker = () => {
             const headers = { Authorization: `Bearer ${token}` };
 
             const [questionsRes, progressRes] = await Promise.all([
-                axios.get('http://localhost:8080/api/v1/dsa/questions', { headers }),
-                axios.get('http://localhost:8080/api/v1/dsa/progress', { headers })
+                axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/dsa/questions`, { headers }),
+                axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/dsa/progress`, { headers })
             ]);
 
             setQuestions(questionsRes.data);
@@ -69,7 +69,7 @@ const DsaTracker = () => {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:8080/api/v1/dsa/progress',
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/dsa/progress`,
                 { questionId, status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -120,8 +120,8 @@ const DsaTracker = () => {
                             key={diff}
                             onClick={() => setFilterDifficulty(diff as any)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${filterDifficulty === diff
-                                    ? 'bg-gray-800 text-white'
-                                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                                ? 'bg-gray-800 text-white'
+                                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                                 }`}
                         >
                             {diff.charAt(0) + diff.slice(1).toLowerCase()}
@@ -186,8 +186,8 @@ const DsaTracker = () => {
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${q.difficulty === 'EASY' ? 'text-green-700 bg-green-100' :
-                                            q.difficulty === 'MEDIUM' ? 'text-yellow-700 bg-yellow-100' :
-                                                'text-red-700 bg-red-100'
+                                        q.difficulty === 'MEDIUM' ? 'text-yellow-700 bg-yellow-100' :
+                                            'text-red-700 bg-red-100'
                                         }`}>
                                         {q.difficulty}
                                     </span>

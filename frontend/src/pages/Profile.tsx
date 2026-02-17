@@ -31,7 +31,7 @@ const Profile = () => {
     const fetchProfile = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:8080/api/v1/student/profile', {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/student/profile`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setProfile(response.data);
@@ -49,7 +49,7 @@ const Profile = () => {
             // Ensure nested user object is handled if needed, usually backend updates profile fields
             // For this implementation, we focus on profile fields.
 
-            await axios.put('http://localhost:8080/api/v1/student/profile', formData, {
+            await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/v1/student/profile`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setIsEditing(false);
@@ -80,8 +80,8 @@ const Profile = () => {
                     <button
                         onClick={() => isEditing ? handleSave() : setIsEditing(true)}
                         className={`px-4 py-2 rounded-md font-medium flex items-center gap-2 transition-colors ${isEditing
-                                ? 'bg-green-600 text-white hover:bg-green-700'
-                                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                            ? 'bg-green-600 text-white hover:bg-green-700'
+                            : 'bg-indigo-600 text-white hover:bg-indigo-700'
                             }`}
                     >
                         {isEditing ? <Save size={18} /> : null}
